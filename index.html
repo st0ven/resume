@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<!-- Thanks for inspecting my resume source code! As a front-end engineer, i firmly believe our resume can represent our proficiency in our craft. You are certainly welcome to take a look around. I have left this un-minified for your benefit to freely inspect and explore. -->
+<html>
+  <head>
+    <meta
+      name="description"
+      content="A resume of Stephen Seator as a front-end engineer and user experience designer"
+    />
+    <meta charset="UTF-8" />
+    <!-- This is a simple style reset import from a CDN resource. -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"
+    />
+    <style>
+      :root {
+        /* CSS custom properties are super convenient to maintain as your styling rules are composed. Hunting down hard-coded measurements can be quite troublesome in more cmplex cases. */
+        --color-primary-a: rgb(224, 0, 168);
+        --color-primary-b: rgb(4, 17, 201);
+        --color-primary-c: rgb(209, 132, 0);
+        --font-size-small: 0.875rem;
+        --font-size-default: 1rem;
+        --font-size-large: 1.5rem;
+        --page-width-max: 880px;
+        --padding-size-nano: 0.125rem;
+        --padding-size-micro: 0.375rem;
+        --padding-size-small: 0.75rem;
+        --padding-size-medium: 1.5rem;
+        --padding-size-large: 3rem;
+      }
+      * {
+        font-weight: inherit;
+      }
+      body,
+      html {
+        width: 100%;
+        height: auto;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+        font-size: var(--font-size-default);
+        font-weight: var(--font-weight-base);
+        color: var(--color-dark-1);
+        background: var(--color-light-0);
+        line-height: 1.4;
+      }
+      a {
+        color: var(--color-link);
+        text-decoration: none;
+        font-weight: inherit;
+        text-decoration: underline;
+      }
+      address {
+        display: inline;
+      }
+      b,
+      strong {
+        font-weight: var(--font-weight-bold);
+      }
+      em,
+      i {
+        font-style: italic;
+      }
+      h1,
+      h2,
+      h3,
+      h4 {
+        color: var(--color-dark-0);
+      }
+      h1,
+      h2 {
+        font-size: var(--font-size-large);
+        margin-bottom: var(--padding-size-micro);
+      }
+      h3 {
+        font-size: var(--font-size-default);
+      }
+      h4 {
+        font-size: var(--font-size-default);
+      }
+      hr {
+        width: 100%;
+        border: 0;
+        height: var(--padding-size-micro);
+        margin: var(--padding-size-large) 0;
+        background: var(--color-light-1);
+      }
+      mark {
+        background: transparent;
+        color: var(--color-dark-1);
+      }
+      p {
+        margin-bottom: var(--padding-size-small);
+      }
+      p:last-of-type {
+        margin-bottom: 0;
+      }
+      sup {
+        position: static;
+        vertical-align: top;
+        font-size: var(--padding-size-small);
+      }
+      ul li {
+        list-style-type: square;
+        margin-bottom: var(--padding-size-micro);
+      }
+      ul li:last-of-type {
+        margin-bottom: 0;
+      }
+      ul.indent-left {
+        margin-left: var(--padding-size-medium);
+      }
+      ul.indent-left li {
+        padding-left: var(--padding-size-micro);
+      }
+      print-break {
+        display: none;
+        height: 0;
+      }
+      .print-only {
+        display: none;
+      }
+      .topic-item {
+        margin-bottom: var(--padding-size-medium);
+      }
+      .topic-item header {
+        color: var(--color-dark-0);
+        margin-bottom: var(--padding-size-small);
+        display: flex;
+        flex-direction: column;
+        grid-row-gap: var(--padding-size-nano);
+      }
+      .topic-item .spacer:after {
+        content: "|";
+        color: var(--color-dark-1);
+        margin: var(--padding-size-micro);
+        position: relative;
+      }
+      .topic {
+        margin-top: var(--padding-size-large);
+      }
+      #contact-info ul li {
+        list-style-type: none;
+        margin-bottom: 0;
+      }
+      #resume {
+        max-width: var(--page-width-max);
+        padding: var(--padding-size-medium) var(--padding-size-medium);
+        grid-row-gap: var(--padding-size-large);
+      }
+      #skills ul {
+        display: flex;
+        flex-wrap: wrap;
+        grid-gap: var(--padding-size-micro);
+      }
+      #skills ul li {
+        display: inline-block;
+        padding: var(--padding-size-micro) var(--padding-size-small);
+        background: var(--color-light-1);
+        font-size: var(--font-size-small);
+        margin: 0;
+      }
+      #skills ul li strong {
+        color: var(--color-dark-0);
+        font-weight: var(--font-weight-base);
+      }
+      @page {
+        size: letter;
+      }
+      @media print {
+        :root {
+          --font-size-small: 0.625rem;
+          --font-size-default: 0.7rem;
+          --font-size-large: 1.0875rem;
+          --font-size-3: 1.5rem;
+          --padding-size-nano: 0rem;
+          --padding-size-micro: 0.325rem;
+          --padding-size-small: 0.5rem;
+          --padding-size-medium: 0.825rem;
+          --padding-size-large: 1.5rem;
+        }
+        body {
+          line-height: 1.3;
+        }
+        hr {
+          display: none;
+        }
+        ul.indent-left {
+          margin-left: var(--padding-size-large);
+        }
+        ul.indent-left li {
+          padding-left: 0;
+        }
+        .print-break {
+          display: block;
+          page-break-before: always;
+        }
+        .print-only {
+          display: initial;
+        }
+        .topic-item header {
+          color: var(--color-dark-0);
+        }
+        .topic-item header strong{
+          font-weight: 700;
+        }
+        #resume {
+          padding: 0;
+          max-width: none;
+        }
+        #skills ul li {
+          color: var(--color-dark-0);
+        }
+        #signoff {
+          display: none;
+        }
+      }
+      @media (prefers-color-scheme: light) {
+        :root {
+          --color-dark-0: rgba(29, 31, 33);
+          --color-dark-1: rgba(96, 98, 99);
+          --color-highlight: rgba(52, 122, 188, 0.2);
+          --color-light-0: rgba(255, 255, 255);
+          --color-light-1: rgba(235, 237, 240);
+          --color-link: rgba(52, 122, 188);
+          --font-weight-base: 400;
+          --font-weight-bold: 600;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --color-dark-0: rgba(255, 255, 255);
+          --color-dark-1: rgba(151, 153, 156);
+          --color-highlight: rgba(237, 115, 28, 0.2);
+          --color-light-0: rgba(29, 31, 33);
+          --color-light-1: rgba(53, 56, 59);
+          --color-link: rgba(237, 115, 28);
+          --font-weight-base: 300;
+          --font-weight-bold: 600;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <article id="resume">
+      <!-- Please take a moment to get t o know some basic info on my name and how to contact me. I'd be glad to hear from you! I apologize in advance if I happen to miss your call, please leave me a message and I'll return a call ASAP! -->
+      <header id="contact-info">
+        <h1><strong>Stephen Seator</strong></h1>
+        <ul>
+          <li>Senior Front-End Engineer & UX Designer</li>
+          <li>
+            <address>Marlton, NJ. 08053</address>
+          </li>
+          <li>
+            <a href="" type="telephone" tabindex="0">(609) 417-7890</a>
+          </li>
+          <li>
+            <a
+              href="mailto:steve.seator@gmail.com"
+              target="_blank"
+              rel="external"
+              tabindex="0"
+              >steve.seator@gmail.com</a
+            >
+          </li>
+        </ul>
+      </header>
+
+      <hr />
+
+      <!-- Here you can learn a little about me and what I can provide for your organization! :) -->
+      <section id="profile" class="topic">
+        <h2><strong>Profile</strong></h2>
+        <p>
+          Embodies the spirit of a <mark>craftsman</mark> with a rich
+          professional history in both <mark>application development</mark> and
+          <mark>human-centered design</mark>. Leveraging a balance of empathy
+          and discipline to deliver real business value with quality,
+          consistency and timeliness.
+        </p>
+        <p>
+          Commands a <mark>strong proficiency</mark> with native JavaScript,
+          utilizing open-source frameworks, libraries, design packages, and
+          other industray-standard toolkits to
+          <mark>enhance productivity</mark> and facilitate streamlined
+          work-flows.
+        </p>
+        <p>
+          Prioritizes <mark>evidence-based</mark> solutions found through
+          research and analysis to satisfy end-user and stakeholder needs.
+          Comprehensively designs and crafts <mark>engaging</mark> and
+          <mark>delightful</mark> experiences from initial conception to final
+          deployment.
+        </p>
+      </section>
+
+      <hr />
+
+      <!-- An outline of relevant skills frequently used or are well-versed in utilizing in service of daily job functions. -->
+      <section id="skills" class="topic">
+        <h2><strong>Proficiency</strong></h2>
+        <ul>
+          <li><strong>JavaScript</strong></li>
+          <li><strong>TypeScript</strong></li>
+          <li><strong>Node.js</strong></li>
+          <li><strong>React.js</strong></li>
+          <li><strong>Express.js</strong></li>
+          <li><strong>Adobe Creative Suite</strong></li>
+          <li><strong>Sketch App</strong></li>
+          <li>Flutter</li>
+          <li>MongoDB</li>
+          <li>CMS</li>
+          <li>Git</li>
+          <li>HTML5</li>
+          <li>CSS</li>
+          <li>SCSS</li>
+          <li>Stylus</li>
+          <li>Module bundlers</li>
+          <li>Data Visualization</li>
+          <li>AGILE/SAFe</li>
+          <li>JIRA</li>
+          <li>Confluence</li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <!-- As an employee under Comcast, I was seated under the TPX (technology, product, experience) organization under the SNP (Smart Network Platform) team. This product serves as a self-service network automation platform built to manage, orchestrate and visualize Comcast's extensive domestic network infrastructure. -->
+      <section id="experience" class="topic">
+        <h2><strong>Experience</strong></h2>
+        <section class="topic-item">
+          <header>
+            <div>
+              <strong>Senior UX Designer</strong>
+              <span class="spacer"></span>
+              <strong>
+                <a href="https://www.comcast.com" target="tab" tabindex="0"
+                  >Comcast</a
+                >
+              </strong>
+            </div>
+            <div>
+              <address>Philadelphia, PA</address>
+              <i>(2019 - Current)</i>
+            </div>
+          </header>
+          <ul class="indent-left">
+            <li>
+              Conduct, analyze, and document end-user research using qualitative
+              and quantitative methods to align business objectives with user
+              community needs
+            </li>
+            <li>
+              Communicate a unified strategy for implementation involving
+              business stakeholders and component teams through creation of user
+              journey maps, flow diagrams, interactive prototypes, low and high
+              fidelity wireframes
+            </li>
+            <li>
+              Lead contributor and maintainer of an internal
+              <mark>design system</mark>, documenting technical & layout
+              specifications, interaction details, typography and aesthetics
+            </li>
+            <li>
+              Management of standards and procedures meant to empower
+              collaboration and ensure smooth delivery of business critical
+              artifacts and deliverables with predicable cadence
+            </li>
+          </ul>
+        </section>
+
+        <section class="topic-item">
+          <header>
+            <div>
+              <strong>Senior Front-End Engineer</strong>
+              <span class="spacer"></span>
+              <strong>
+                <a href="https://www.comcast.com" target="tab"
+                  >Comcast</a
+                ></strong
+              >
+            </div>
+            <div>
+              <address>Philadelphia, PA</address>
+              <i>(2017 - 2019)</i>
+            </div>
+          </header>
+          <ul class="indent-left">
+            <li>
+              Lead selection of utilized technologies, project architecture,
+              system design, build process and deployment pipeline for new
+              internal platform targeting automated network orchestration.
+            </li>
+            <li>
+              Conceptualized and communicated product vision to internal
+              stakeholders, component teams and end users through presentations,
+              mockups and prototypes
+            </li>
+            <li>
+              Led UI development of feature-level MVPs, rapidly enabling
+              business critical operations to be conducted via
+              platform-empowered automation within 6 months
+            </li>
+            <li>
+              Management and coordination of tasks to team members, promoting
+              individual ownership of the process and buy-in of development
+              strategy
+            </li>
+          </ul>
+        </section>
+
+        <!-- Local Wisdom is a modest sized agency located in central New Jersey, focusing on native and web app development for various regional clients. By far their largest client, Janssen Pharmaceuticals, permanently seats Local Wisdom employees on-premesis to perform daily duties in service of their development needs. Primary products include various sales-related applications used by field reps throughout the country. -->
+        <section class="topic-item">
+          <header>
+            <div>
+              <strong>UI Developer</strong>
+              <span class="spacer"></span>
+              <strong
+                ><a href="http://www.localwisdom.com" target="tab"
+                  >Local Wisdom</a
+                ></strong
+              >
+            </div>
+            <div>
+              <address>Raritan, NJ</address>
+              <i>(2013 - 2017)</i>
+            </div>
+          </header>
+          <ul class="indent-left">
+            <li>
+              Development of branded pharmaceutical sales presentations and
+              interactive visual aids for web &amp; iPad
+            </li>
+            <li>
+              Utilize HTML5/CSS3, JavaScript, JSON, AJAX and additional
+              open-source technologies to create engaging, dynamic interactive
+              experiences
+            </li>
+            <li>
+              Creation and enhancement of proprietary JavaScript libraries and
+              modules to facilitate consistent and reusable product templates
+            </li>
+            <li>
+              Interfaced with agencies to establish product expectations and
+              define development specifications
+            </li>
+            <li>
+              Modified existing and created new media assets required for
+              implementation as necessary
+            </li>
+          </ul>
+        </section>
+        <em>(More employment history available upon request)</em>
+      </section>
+
+      <hr class="print-break" />
+
+      <!-- Education details section highlighting universities attended, over how many years, and any notable accomplishments-->
+      <section id="education" class="topic">
+        <h2><strong>Education</strong></h2>
+        <section class="topic-item">
+          <header>
+            <strong
+              ><a class="" href="https://www.rutgers.edu/" target="tab"
+                >Rutgers University</a
+              ></strong
+            >
+            <div>
+              <address>New Brunswick, NJ</address>
+              <em>(2002 - 2004)</em>
+            </div>
+          </header>
+          <ul class="indent-left">
+            <li>
+              Studies focused in business &amp; economics, computer science
+            </li>
+            <li>
+              Performed contract work for various mobile developers in tandem to
+              primary studies
+            </li>
+          </ul>
+        </section>
+        <section class="topic-item">
+          <header>
+            <strong
+              ><a class="" href="https://www.ursinus.edu/" target="tab"
+                >Ursinus College</a
+              ></strong
+            >
+            <div>
+              <address>Collegeville, PA</address>
+              <em>(2000 - 2002)</em>
+            </div>
+          </header>
+          <ul class="indent-left">
+            <li>Major studies in mathematics and computer science</li>
+            <li>Assumed resident assistant role through sophomore year</li>
+          </ul>
+        </section>
+      </section>
+
+      <hr />
+
+      <footer id="signoff">
+        <p>
+          <a href="seator_resume_2016.pdf" class="pdf_link">view PDF version</a>
+        </p>
+      </footer>
+    </article>
+  </body>
+</html>
+<!-- rebuild by neat -->
