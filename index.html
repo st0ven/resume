@@ -7,6 +7,7 @@
       content="A resume of Stephen Seator as a front-end engineer and user experience designer"
     />
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <!-- This is a simple style reset import from a CDN resource. -->
     <link
       rel="stylesheet"
@@ -15,12 +16,9 @@
     <style>
       :root {
         /* CSS custom properties are super convenient to maintain as your styling rules are composed. Hunting down hard-coded measurements can be quite troublesome in more cmplex cases. */
-        --color-primary-a: rgb(224, 0, 168);
-        --color-primary-b: rgb(4, 17, 201);
-        --color-primary-c: rgb(209, 132, 0);
         --font-size-small: 0.875rem;
         --font-size-default: 1rem;
-        --font-size-large: 1.5rem;
+        --font-size-large: 1.75rem;
         --page-width-max: 880px;
         --padding-size-nano: 0.125rem;
         --padding-size-micro: 0.375rem;
@@ -29,12 +27,25 @@
         --padding-size-large: 3rem;
       }
       * {
+        font-weight: var(--font-weight-base);
+      }
+      a {
+        color: var(--color-link);
+        text-decoration: none;
         font-weight: inherit;
+        text-decoration: underline;
+      }
+      address {
+        display: inline;
       }
       body,
       html {
         width: 100%;
         height: auto;
+      }
+      b,
+      strong {
+        font-weight: var(--font-weight-bold);
       }
       body {
         display: flex;
@@ -46,19 +57,6 @@
         color: var(--color-dark-1);
         background: var(--color-light-0);
         line-height: 1.4;
-      }
-      a {
-        color: var(--color-link);
-        text-decoration: none;
-        font-weight: inherit;
-        text-decoration: underline;
-      }
-      address {
-        display: inline;
-      }
-      b,
-      strong {
-        font-weight: var(--font-weight-bold);
       }
       em,
       i {
@@ -116,7 +114,7 @@
       ul.indent-left li {
         padding-left: var(--padding-size-micro);
       }
-      print-break {
+      .print-break {
         display: none;
         height: 0;
       }
@@ -133,12 +131,6 @@
         flex-direction: column;
         grid-row-gap: var(--padding-size-nano);
       }
-      .topic-item .spacer:after {
-        content: "|";
-        color: var(--color-dark-1);
-        margin: var(--padding-size-micro);
-        position: relative;
-      }
       .topic {
         margin-top: var(--padding-size-large);
       }
@@ -148,7 +140,7 @@
       }
       #resume {
         max-width: var(--page-width-max);
-        padding: var(--padding-size-medium) var(--padding-size-medium);
+        padding: var(--padding-size-medium);
         grid-row-gap: var(--padding-size-large);
       }
       #skills ul {
@@ -163,56 +155,93 @@
         font-size: var(--font-size-small);
         margin: 0;
       }
-      #skills ul li strong {
-        color: var(--color-dark-0);
-        font-weight: var(--font-weight-base);
-      }
       @page {
         size: letter;
       }
       @media print {
         :root {
-          --font-size-small: 0.625rem;
-          --font-size-default: 0.7rem;
-          --font-size-large: 1.0875rem;
-          --font-size-3: 1.5rem;
+          --color-dark-0: rgba(33, 33, 33);
+          --color-dark-1: rgba(96, 96, 96);
+          --color-light-0: rgba(255, 255, 255);
+          --color-light-1: rgba(238, 238, 238);
+          --color-link: rgba(27, 75, 179);
+          --font-size-small: 9px;
+          --font-size-default: 11px;
+          --font-size-large: 18px;
+          --font-size-x-large: 28px;
+          --font-weight-base: 300;
+          --font-weight-bold: 700;
           --padding-size-nano: 0rem;
-          --padding-size-micro: 0.325rem;
-          --padding-size-small: 0.5rem;
-          --padding-size-medium: 0.825rem;
-          --padding-size-large: 1.5rem;
+          --padding-size-micro: 0.25em;
+          --padding-size-small: 0.5em;
+          --padding-size-medium: 0.825em;
+          --padding-size-large: 2em;
+          --padding-list-indent: 1.5em;
+        }
+        a {
+          text-decoration: none;
         }
         body {
-          line-height: 1.3;
+          line-height: 1.4;
+        }
+        h1 {
+          font-size: var(--font-size-x-large);
+          line-height: 1;
         }
         hr {
           display: none;
         }
         ul.indent-left {
-          margin-left: var(--padding-size-large);
+          margin-left: var(--padding-list-indent);
         }
         ul.indent-left li {
           padding-left: 0;
         }
-        .print-break {
-          display: block;
-          page-break-before: always;
-        }
-        .print-only {
-          display: initial;
-        }
         .topic-item header {
           color: var(--color-dark-0);
         }
-        .topic-item header strong{
-          font-weight: 700;
+        .topic {
+          margin-top: 0;
+        }
+        #contact-info {
+          grid-area: contact-info;
+        }
+        #education {
+          grid-area: education;
+          align-self: flex-start;
+        }
+        #experience {
+          grid-area: experience;
+        }
+        #profile {
+          grid-area: profile;
+          align-self: flex-start;
         }
         #resume {
           padding: 0;
           max-width: none;
+          display: grid;
+          align-items: flex-start;
+          grid-gap: var(--padding-size-large);
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: auto auto auto 1fr;
+          grid-template-areas:
+            "contact-info contact-info"
+            "experience profile"
+            "experience skills"
+            "experience education";
+        }
+        #skills {
+          align-self: flex-start;
+        }
+        #skills ul {
+          grid-gap: var(--padding-size-small);
         }
         #skills ul li {
-          color: var(--color-dark-0);
+          color: var(--color-dark-1);
+          background: transparent;
+          border: 1px solid var(--color-dark-1);
+          padding: var(--padding-size-small) var(--padding-size-medium);
         }
         #signoff {
           display: none;
@@ -225,9 +254,9 @@
           --color-highlight: rgba(52, 122, 188, 0.2);
           --color-light-0: rgba(255, 255, 255);
           --color-light-1: rgba(235, 237, 240);
-          --color-link: rgba(52, 122, 188);
+          --color-link: rgba(27, 75, 179);
           --font-weight-base: 400;
-          --font-weight-bold: 600;
+          --font-weight-bold: 700;
         }
       }
       @media (prefers-color-scheme: dark) {
@@ -240,6 +269,30 @@
           --color-link: rgba(237, 115, 28);
           --font-weight-base: 300;
           --font-weight-bold: 600;
+        }
+      }
+      @media screen and (orientation: portrait) and (max-width: 800px) {
+        :root {
+          --padding-size-nano: 0.125rem;
+          --padding-size-micro: 0.25rem;
+          --padding-size-small: 0.5rem;
+          --padding-size-medium: 1rem;
+          --padding-size-large: 2rem;
+        }
+        hr {
+          margin: var(--padding-size-medium) 0;
+        }
+        ul.indent-left li {
+          padding-left: 0;
+        }
+        .topic {
+          margin-top: var(--padding-size-medium);
+        }
+        #skills ul {
+          grid-gap: var(--padding-size-small);
+        }
+        #skills ul li {
+          padding: var(--padding-size-small) var(--padding-size-medium);
         }
       }
     </style>
@@ -276,22 +329,23 @@
       <section id="profile" class="topic">
         <h2><strong>Profile</strong></h2>
         <p>
-          Embodies the spirit of a <mark>craftsman</mark> with a rich
-          professional history in both <mark>application development</mark> and
-          <mark>human-centered design</mark>. Leveraging a balance of empathy
-          and discipline to deliver real business value with quality,
-          consistency and timeliness.
+          Bringing years of product development experience across various
+          industries with a rich professional history in both
+          <mark>application development</mark> and
+          <mark>human-centered design</mark>. Weilding a balance of discipline
+          and empathy to deliver real business value with quality, consistency
+          and timeliness.
         </p>
         <p>
-          Commands a <mark>strong proficiency</mark> with native JavaScript,
-          utilizing open-source frameworks, libraries, design packages, and
-          other industray-standard toolkits to
+          Commands a <mark>strong proficiency</mark> with front-end technologies
+          utilizing open-source frameworks, libraries, design packages,
+          budnlers, and other industray-standard toolkits to
           <mark>enhance productivity</mark> and facilitate streamlined
           work-flows.
         </p>
         <p>
-          Prioritizes <mark>evidence-based</mark> solutions found through
-          research and analysis to satisfy end-user and stakeholder needs.
+          Prioritizes <mark>evidence-based</mark> solutions founded via research
+          and analysis to satisfy end-user and stakeholder needs.
           Comprehensively designs and crafts <mark>engaging</mark> and
           <mark>delightful</mark> experiences from initial conception to final
           deployment.
@@ -302,7 +356,7 @@
 
       <!-- An outline of relevant skills frequently used or are well-versed in utilizing in service of daily job functions. -->
       <section id="skills" class="topic">
-        <h2><strong>Proficiency</strong></h2>
+        <h2><strong>Skills</strong></h2>
         <ul>
           <li><strong>JavaScript</strong></li>
           <li><strong>TypeScript</strong></li>
@@ -331,18 +385,15 @@
 
       <!-- As an employee under Comcast, I was seated under the TPX (technology, product, experience) organization under the SNP (Smart Network Platform) team. This product serves as a self-service network automation platform built to manage, orchestrate and visualize Comcast's extensive domestic network infrastructure. -->
       <section id="experience" class="topic">
-        <h2><strong>Experience</strong></h2>
+        <h2><strong>Employment</strong></h2>
         <section class="topic-item">
           <header>
-            <div>
-              <strong>Senior UX Designer</strong>
-              <span class="spacer"></span>
-              <strong>
-                <a href="https://www.comcast.com" target="tab" tabindex="0"
-                  >Comcast</a
-                >
-              </strong>
-            </div>
+            <strong>
+              <a href="https://www.comcast.com" target="tab" tabindex="0"
+                >Comcast</a
+              >
+            </strong>
+            <strong>Senior UX Designer</strong>
             <div>
               <address>Philadelphia, PA</address>
               <i>(2019 - Current)</i>
@@ -375,15 +426,12 @@
 
         <section class="topic-item">
           <header>
-            <div>
-              <strong>Senior Front-End Engineer</strong>
-              <span class="spacer"></span>
-              <strong>
-                <a href="https://www.comcast.com" target="tab"
-                  >Comcast</a
-                ></strong
-              >
-            </div>
+            <strong
+              ><a href="https://www.comcast.com" target="tab"
+                >Comcast</a
+              ></strong
+            >
+            <strong>Senior Front-End Engineer</strong>
             <div>
               <address>Philadelphia, PA</address>
               <i>(2017 - 2019)</i>
@@ -391,9 +439,14 @@
           </header>
           <ul class="indent-left">
             <li>
-              Lead selection of utilized technologies, project architecture,
-              system design, build process and deployment pipeline for new
-              internal platform targeting automated network orchestration.
+              Lead of a newly organized front-end team tasked with creating a
+              web interface for an internal platform featuring network
+              automation and orchestration.
+            </li>
+            <li>
+              Responsible for selection of front-end frameworks, tooling,
+              project architecture, system design, build process and deployment
+              pipeline.
             </li>
             <li>
               Conceptualized and communicated product vision to internal
@@ -401,14 +454,14 @@
               mockups and prototypes
             </li>
             <li>
-              Led UI development of feature-level MVPs, rapidly enabling
-              business critical operations to be conducted via
-              platform-empowered automation within 6 months
+              Led development and deployment of several business critical
+              features requiring complex domain-specific knowledge within 6
+              months of formation
             </li>
             <li>
               Management and coordination of tasks to team members, promoting
-              individual ownership of the process and buy-in of development
-              strategy
+              individual product ownership and buy-in of development strategy
+              and process
             </li>
           </ul>
         </section>
@@ -416,15 +469,12 @@
         <!-- Local Wisdom is a modest sized agency located in central New Jersey, focusing on native and web app development for various regional clients. By far their largest client, Janssen Pharmaceuticals, permanently seats Local Wisdom employees on-premesis to perform daily duties in service of their development needs. Primary products include various sales-related applications used by field reps throughout the country. -->
         <section class="topic-item">
           <header>
-            <div>
-              <strong>UI Developer</strong>
-              <span class="spacer"></span>
-              <strong
-                ><a href="http://www.localwisdom.com" target="tab"
-                  >Local Wisdom</a
-                ></strong
-              >
-            </div>
+            <strong
+              ><a href="http://www.localwisdom.com" target="tab"
+                >Local Wisdom</a
+              ></strong
+            >
+            <strong>UI Developer</strong>
             <div>
               <address>Raritan, NJ</address>
               <i>(2013 - 2017)</i>
@@ -457,7 +507,7 @@
         <em>(More employment history available upon request)</em>
       </section>
 
-      <hr class="print-break" />
+      <hr />
 
       <!-- Education details section highlighting universities attended, over how many years, and any notable accomplishments-->
       <section id="education" class="topic">
@@ -475,12 +525,10 @@
             </div>
           </header>
           <ul class="indent-left">
+            <li>Studies focused in business, economics and computer science</li>
             <li>
-              Studies focused in business &amp; economics, computer science
-            </li>
-            <li>
-              Performed contract work for various mobile developers in tandem to
-              primary studies
+              Performed contract work for various mobile application developers
+              in tandem to primary studies
             </li>
           </ul>
         </section>
@@ -506,11 +554,8 @@
       <hr />
 
       <footer id="signoff">
-        <p>
-          <a href="seator_resume_2016.pdf" class="pdf_link">view PDF version</a>
-        </p>
+        <a href="resume.pdf">view PDF version</a>
       </footer>
     </article>
   </body>
 </html>
-<!-- rebuild by neat -->
