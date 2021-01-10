@@ -16,6 +16,7 @@
     <style>
       :root {
         /* CSS custom properties are super convenient to maintain as your styling rules are composed. Hunting down hard-coded measurements can be quite troublesome in more cmplex cases. */
+        --divider-height: 4px;
         --font-size-small: 0.875rem;
         --font-size-default: 1rem;
         --font-size-large: 1.75rem;
@@ -82,7 +83,7 @@
       hr {
         width: 100%;
         border: 0;
-        height: var(--padding-size-micro);
+        height: var(--divider-height);
         margin: var(--padding-size-large) 0;
         background: var(--color-light-1);
       }
@@ -274,9 +275,9 @@
       @media screen and (orientation: portrait) and (max-width: 800px) {
         :root {
           --padding-size-nano: 0.125rem;
-          --padding-size-micro: 0.25rem;
-          --padding-size-small: 0.5rem;
-          --padding-size-medium: 1rem;
+          --padding-size-micro: 0.5rem;
+          --padding-size-small: 0.875rem;
+          --padding-size-medium: 1.25rem;
           --padding-size-large: 2rem;
         }
         hr {
@@ -289,10 +290,10 @@
           margin-top: var(--padding-size-medium);
         }
         #skills ul {
-          grid-gap: var(--padding-size-small);
+          grid-gap: var(--padding-size-micro);
         }
         #skills ul li {
-          padding: var(--padding-size-small) var(--padding-size-medium);
+          padding: var(--padding-size-micro) var(--padding-size-medium);
         }
       }
     </style>
