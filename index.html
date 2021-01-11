@@ -20,16 +20,20 @@
         --font-size-small: 0.875rem;
         --font-size-default: 1rem;
         --font-size-large: 1.75rem;
+        --font-size-x-large: 2.5rem;
         --page-width-max: 880px;
-        --padding-size-nano: 0.125rem;
-        --padding-size-micro: 0.375rem;
-        --padding-size-small: 0.75rem;
-        --padding-size-medium: 1.5rem;
-        --padding-size-large: 3rem;
+        --padding-size-base: 0.125rem;
+        --padding-size-small: 0.375rem;
+        --padding-size-medium: 0.75rem;
+        --padding-size-large: 1.5rem;
+        /* Set a readable base font size in the root selector for cascading relative measurements */
+        font-size: 16px;
       }
+      /* Let's introduce any additional over-rides applied generally here with this wildcard */
       * {
         font-weight: var(--font-weight-base);
       }
+      /* Specificity rules (0, 0, 1) - Applied to tag selectors*/
       a {
         color: var(--color-link);
         text-decoration: none;
@@ -65,26 +69,24 @@
       }
       h1,
       h2,
-      h3,
-      h4 {
+      h3 {
         color: var(--color-dark-0);
       }
-      h1,
+      h1 {
+        font-size: var(--font-size-x-large);
+        margin-bottom: var(--padding-size-small);
+      }
       h2 {
         font-size: var(--font-size-large);
-        margin-bottom: var(--padding-size-micro);
+        margin-bottom: var(--padding-size-small);
       }
       h3 {
-        font-size: var(--font-size-default);
-      }
-      h4 {
         font-size: var(--font-size-default);
       }
       hr {
         width: 100%;
         border: 0;
         height: var(--divider-height);
-        margin: var(--padding-size-large) 0;
         background: var(--color-light-1);
       }
       mark {
@@ -92,7 +94,7 @@
         color: var(--color-dark-1);
       }
       p {
-        margin-bottom: var(--padding-size-small);
+        margin-bottom: var(--padding-size-medium);
       }
       p:last-of-type {
         margin-bottom: 0;
@@ -100,20 +102,20 @@
       sup {
         position: static;
         vertical-align: top;
-        font-size: var(--padding-size-small);
+        font-size: var(--padding-size-medium);
       }
       ul li {
-        list-style-type: square;
-        margin-bottom: var(--padding-size-micro);
+        list-style-type: none;
+        margin-bottom: var(--padding-size-small);
       }
       ul li:last-of-type {
         margin-bottom: 0;
       }
       ul.indent-left {
-        margin-left: var(--padding-size-medium);
+        margin-left: var(--padding-size-large);
       }
       ul.indent-left li {
-        padding-left: var(--padding-size-micro);
+        padding-left: var(--padding-size-base);
       }
       .print-break {
         display: none;
@@ -122,18 +124,19 @@
       .print-only {
         display: none;
       }
-      .topic-item {
-        margin-bottom: var(--padding-size-medium);
+      .sub-topic-wrapper {
+        display: grid;
+        grid-row-gap: var(--padding-size-medium);
+      }
+      .sub-topic-wrapper ul li {
+        list-style-type: square;
       }
       .topic-item header {
         color: var(--color-dark-0);
         margin-bottom: var(--padding-size-small);
         display: flex;
         flex-direction: column;
-        grid-row-gap: var(--padding-size-nano);
-      }
-      .topic {
-        margin-top: var(--padding-size-large);
+        grid-row-gap: var(--padding-size-base);
       }
       #contact-info ul li {
         list-style-type: none;
@@ -141,24 +144,27 @@
       }
       #resume {
         max-width: var(--page-width-max);
-        padding: var(--padding-size-medium);
+        padding: var(--padding-size-large);
+        display: grid;
         grid-row-gap: var(--padding-size-large);
       }
       #skills ul {
         display: flex;
         flex-wrap: wrap;
-        grid-gap: var(--padding-size-micro);
+        grid-gap: var(--padding-size-small);
       }
       #skills ul li {
         display: inline-block;
-        padding: var(--padding-size-micro) var(--padding-size-small);
+        padding: var(--padding-size-small) var(--padding-size-medium);
         background: var(--color-light-1);
         font-size: var(--font-size-small);
         margin: 0;
       }
+      /* When printing, define our expected output size */
       @page {
         size: letter;
       }
+      /* Printing is often a messy affair when relying on browsers to directly translate styling to the print format output. This media query can help us tailor this output to an optimal format. This will still be somewhat varied dependent on the viewer's browser. */
       @media print {
         :root {
           --color-dark-0: rgba(33, 33, 33);
@@ -166,31 +172,32 @@
           --color-light-0: rgba(255, 255, 255);
           --color-light-1: rgba(238, 238, 238);
           --color-link: rgba(27, 75, 179);
-          --font-size-small: 9px;
+          --font-size-small: 10px;
           --font-size-default: 11px;
           --font-size-large: 18px;
           --font-size-x-large: 28px;
           --font-weight-base: 300;
           --font-weight-bold: 700;
-          --padding-size-nano: 0rem;
-          --padding-size-micro: 0.25em;
-          --padding-size-small: 0.5em;
-          --padding-size-medium: 0.825em;
-          --padding-size-large: 2em;
+          --grid-gap-size: 1.5rem;
+          --padding-size-base: 0rem;
+          --padding-size-small: 0.125em;
+          --padding-size-medium: 0.25em;
+          --padding-size-large: 0.5em;
+          --padding-size-x-large: 0.75rem;
           --padding-list-indent: 1.5em;
         }
-        a {
-          text-decoration: none;
-        }
-        body {
-          line-height: 1.4;
-        }
         h1 {
-          font-size: var(--font-size-x-large);
           line-height: 1;
+        }
+        h1,
+        h2 {
+          margin-bottom: var(--padding-size-small);
         }
         hr {
           display: none;
+        }
+        p {
+          margin-bottom: var(--padding-size-large);
         }
         ul.indent-left {
           margin-left: var(--padding-list-indent);
@@ -198,8 +205,12 @@
         ul.indent-left li {
           padding-left: 0;
         }
+        .sub-topic-wrapper {
+          grid-row-gap: var(--padding-size-medium);
+        }
         .topic-item header {
           color: var(--color-dark-0);
+          margin-bottom: var(--padding-size-medium);
         }
         .topic {
           margin-top: 0;
@@ -211,7 +222,7 @@
           grid-area: education;
           align-self: flex-start;
         }
-        #experience {
+        #employment {
           grid-area: experience;
         }
         #profile {
@@ -221,9 +232,7 @@
         #resume {
           padding: 0;
           max-width: none;
-          display: grid;
-          align-items: flex-start;
-          grid-gap: var(--padding-size-large);
+          grid-gap: var(--grid-gap-size);
           grid-template-columns: 1fr 1fr;
           grid-template-rows: auto auto auto 1fr;
           grid-template-areas:
@@ -236,13 +245,13 @@
           align-self: flex-start;
         }
         #skills ul {
-          grid-gap: var(--padding-size-small);
+          grid-gap: var(--padding-size-large);
         }
         #skills ul li {
           color: var(--color-dark-1);
           background: transparent;
           border: 1px solid var(--color-dark-1);
-          padding: var(--padding-size-small) var(--padding-size-medium);
+          padding: var(--padding-size-large) var(--padding-size-x-large);
         }
         #signoff {
           display: none;
@@ -275,28 +284,22 @@
           --font-weight-bold: 600;
         }
       }
+      /* Mobile presentation rule overrides for optimal viewing experience */
       @media screen and (orientation: portrait) and (max-width: 800px) {
         :root {
-          --padding-size-nano: 0.125rem;
-          --padding-size-micro: 0.5rem;
-          --padding-size-small: 0.875rem;
-          --padding-size-medium: 1.25rem;
-          --padding-size-large: 2rem;
-        }
-        hr {
-          margin: var(--padding-size-medium) 0;
+          --padding-size-base: 0.125rem;
+          --padding-size-small: 0.375rem;
+          --padding-size-medium: 0.75rem;
+          --padding-size-large: 1.25rem;
         }
         ul.indent-left li {
           padding-left: 0;
         }
-        .topic {
-          margin-top: var(--padding-size-medium);
-        }
         #skills ul {
-          grid-gap: var(--padding-size-micro);
+          grid-gap: var(--padding-size-small);
         }
         #skills ul li {
-          padding: var(--padding-size-micro) var(--padding-size-medium);
+          padding: var(--padding-size-small) var(--padding-size-large);
         }
       }
     </style>
@@ -308,7 +311,9 @@
       <header id="contact-info">
         <h1><strong>Stephen Seator</strong></h1>
         <ul>
-          <li>Senior Front-End Engineer & UX Designer</li>
+          <li>
+            <mark>Senior Front-End Engineer & UX Designer</mark>
+          </li>
           <li>
             <address>Marlton, NJ. 08053</address>
           </li>
@@ -388,127 +393,119 @@
       <hr />
 
       <!-- As an employee under Comcast, I was seated under the TPX (technology, product, experience) organization under the SNP (Smart Network Platform) team. This product serves as a self-service network automation platform built to manage, orchestrate and visualize Comcast's extensive domestic network infrastructure. -->
-      <section id="experience" class="topic">
+      <section id="employment" class="topic">
         <h2><strong>Employment</strong></h2>
-        <section class="topic-item">
-          <header>
-            <strong>
+        <ul class="sub-topic-wrapper">
+          <li class="topic-item">
+            <header>
               <a href="https://www.comcast.com" target="tab" tabindex="0"
                 >Comcast</a
               >
-            </strong>
-            <strong>Senior UX Designer</strong>
-            <div>
-              <address>Philadelphia, PA</address>
-              <i>(2019 - Current)</i>
-            </div>
-          </header>
-          <ul class="indent-left">
-            <li>
-              Conduct, analyze, and document end-user research using qualitative
-              and quantitative methods to align business objectives with user
-              community needs
-            </li>
-            <li>
-              Communicate a unified strategy for implementation involving
-              business stakeholders and component teams through creation of user
-              journey maps, flow diagrams, interactive prototypes, low and high
-              fidelity wireframes
-            </li>
-            <li>
-              Lead contributor and maintainer of an internal
-              <mark>design system</mark>, documenting technical & layout
-              specifications, interaction details, typography and aesthetics
-            </li>
-            <li>
-              Management of standards and procedures meant to empower
-              collaboration and ensure smooth delivery of business critical
-              artifacts and deliverables with predictable cadence
-            </li>
-          </ul>
-        </section>
+              <strong>Senior UX Designer</strong>
+              <div>
+                <address>Philadelphia, PA</address>
+                <i>(2019 - Current)</i>
+              </div>
+            </header>
+            <ul class="indent-left">
+              <li>
+                Conduct, analyze, and document end-user research using
+                qualitative and quantitative methods to align business
+                objectives with user community needs
+              </li>
+              <li>
+                Communicate a unified strategy for implementation involving
+                business stakeholders and component teams through creation of
+                user journey maps, flow diagrams, interactive prototypes, low
+                and high fidelity wireframes
+              </li>
+              <li>
+                Lead contributor and maintainer of an internal
+                <mark>design system</mark>, documenting technical & layout
+                specifications, interaction details, typography and aesthetics
+              </li>
+              <li>
+                Management of standards and procedures meant to empower
+                collaboration and ensure smooth delivery of business critical
+                artifacts and deliverables with predictable cadence
+              </li>
+            </ul>
+          </li>
 
-        <section class="topic-item">
-          <header>
-            <strong
-              ><a href="https://www.comcast.com" target="tab"
-                >Comcast</a
-              ></strong
-            >
-            <strong>Senior Front-End Engineer</strong>
-            <div>
-              <address>Philadelphia, PA</address>
-              <i>(2017 - 2019)</i>
-            </div>
-          </header>
-          <ul class="indent-left">
-            <li>
-              Lead of a newly organized front-end team tasked with creating a
-              web interface for an internal platform featuring network
-              automation and orchestration.
-            </li>
-            <li>
-              Responsible for selection of front-end frameworks, tooling,
-              project architecture, system design, build process and deployment
-              pipeline.
-            </li>
-            <li>
-              Conceptualized and communicated product vision to internal
-              stakeholders, component teams and end users through presentations,
-              mockups and prototypes
-            </li>
-            <li>
-              Led development and deployment of several business critical
-              features requiring complex domain-specific knowledge within 6
-              months of formation
-            </li>
-            <li>
-              Management and coordination of tasks to team members, promoting
-              individual product ownership and buy-in of development strategy
-              and process
-            </li>
-          </ul>
-        </section>
+          <li class="topic-item">
+            <header>
+              <a href="https://www.comcast.com" target="tab">Comcast</a>
+              <strong>Senior Front-End Engineer</strong>
+              <div>
+                <address>Philadelphia, PA</address>
+                <i>(2017 - 2019)</i>
+              </div>
+            </header>
+            <ul class="indent-left">
+              <li>
+                Lead of a newly organized front-end team tasked with creating a
+                web interface for an internal platform featuring network
+                automation and orchestration.
+              </li>
+              <li>
+                Responsible for selection of front-end frameworks, tooling,
+                project architecture, system design, build process and
+                deployment pipeline.
+              </li>
+              <li>
+                Conceptualized and communicated product vision to internal
+                stakeholders, component teams and end users through
+                presentations, mockups and prototypes
+              </li>
+              <li>
+                Led development and deployment of several business critical
+                features requiring complex domain-specific knowledge within 6
+                months of formation
+              </li>
+              <li>
+                Management and coordination of tasks to team members, promoting
+                individual product ownership and buy-in of development strategy
+                and process
+              </li>
+            </ul>
+          </li>
 
-        <!-- Local Wisdom is a modest sized agency located in central New Jersey, focusing on native and web app development for various regional clients. By far their largest client, Janssen Pharmaceuticals, permanently seats Local Wisdom employees on-premesis to perform daily duties in service of their development needs. Primary products include various sales-related applications used by field reps throughout the country. -->
-        <section class="topic-item">
-          <header>
-            <strong
-              ><a href="http://www.localwisdom.com" target="tab"
-                >Local Wisdom</a
-              ></strong
-            >
-            <strong>UI Developer</strong>
-            <div>
-              <address>Raritan, NJ</address>
-              <i>(2013 - 2017)</i>
-            </div>
-          </header>
-          <ul class="indent-left">
-            <li>
-              Development of branded pharmaceutical sales presentations and
-              interactive visual aids for web &amp; iPad
-            </li>
-            <li>
-              Utilize HTML5/CSS3, JavaScript, JSON, AJAX and additional
-              open-source technologies to create engaging, dynamic interactive
-              experiences
-            </li>
-            <li>
-              Creation and enhancement of proprietary JavaScript libraries and
-              modules to facilitate consistent and reusable product templates
-            </li>
-            <li>
-              Interfaced with agencies to establish product expectations and
-              define development specifications
-            </li>
-            <li>
-              Modified existing and created new media assets required for
-              implementation as necessary
-            </li>
-          </ul>
-        </section>
-        <em>(More employment history available upon request)</em>
+          <!-- Local Wisdom is a modest sized agency located in central New Jersey, focusing on native and web app development for various regional clients. By far their largest client, Janssen Pharmaceuticals, permanently seats Local Wisdom employees on-premesis to perform daily duties in service of their development needs. Primary products include various sales-related applications used by field reps throughout the country. -->
+          <li class="topic-item">
+            <header>
+              <a href="http://www.localwisdom.com" target="tab">Local Wisdom</a>
+              <strong>UI Developer</strong>
+              <div>
+                <address>Raritan, NJ</address>
+                <i>(2013 - 2017)</i>
+              </div>
+            </header>
+            <ul class="indent-left">
+              <li>
+                Development of branded pharmaceutical sales presentations and
+                interactive visual aids for web &amp; iPad
+              </li>
+              <li>
+                Utilize HTML5/CSS3, JavaScript, JSON, AJAX and additional
+                open-source technologies to create engaging, dynamic interactive
+                experiences
+              </li>
+              <li>
+                Creation and enhancement of proprietary JavaScript libraries and
+                modules to facilitate consistent and reusable product templates
+              </li>
+              <li>
+                Interfaced with agencies to establish product expectations and
+                define development specifications
+              </li>
+              <li>
+                Modified existing and created new media assets required for
+                implementation as necessary
+              </li>
+            </ul>
+          </li>
+          <em>(More employment history available upon request)</em>
+        </ul>
       </section>
 
       <hr />
@@ -516,43 +513,43 @@
       <!-- Education details section highlighting universities attended, over how many years, and any notable accomplishments-->
       <section id="education" class="topic">
         <h2><strong>Education</strong></h2>
-        <section class="topic-item">
-          <header>
-            <strong
-              ><a class="" href="https://www.rutgers.edu/" target="tab"
+        <ul class="sub-topic-wrapper">
+          <li class="topic-item">
+            <header>
+              <a class="" href="https://www.rutgers.edu/" target="tab"
                 >Rutgers University</a
-              ></strong
-            >
-            <div>
-              <address>New Brunswick, NJ</address>
-              <em>(2002 - 2004)</em>
-            </div>
-          </header>
-          <ul class="indent-left">
-            <li>Studies focused in business, economics and computer science</li>
-            <li>
-              Performed contract work for various mobile application developers
-              in tandem to primary studies
-            </li>
-          </ul>
-        </section>
-        <section class="topic-item">
-          <header>
-            <strong
-              ><a class="" href="https://www.ursinus.edu/" target="tab"
+              >
+              <div>
+                <address>New Brunswick, NJ</address>
+                <em>(2002 - 2004)</em>
+              </div>
+            </header>
+            <ul class="indent-left">
+              <li>
+                Studies focused in business, economics and computer science
+              </li>
+              <li>
+                Performed contract work for various mobile application
+                developers in tandem to primary studies
+              </li>
+            </ul>
+          </li>
+          <li class="topic-item">
+            <header>
+              <a class="" href="https://www.ursinus.edu/" target="tab"
                 >Ursinus College</a
-              ></strong
-            >
-            <div>
-              <address>Collegeville, PA</address>
-              <em>(2000 - 2002)</em>
-            </div>
-          </header>
-          <ul class="indent-left">
-            <li>Major studies in mathematics and computer science</li>
-            <li>Assumed resident assistant role through sophomore year</li>
-          </ul>
-        </section>
+              >
+              <div>
+                <address>Collegeville, PA</address>
+                <em>(2000 - 2002)</em>
+              </div>
+            </header>
+            <ul class="indent-left">
+              <li>Major studies in mathematics and computer science</li>
+              <li>Assumed resident assistant role through sophomore year</li>
+            </ul>
+          </li>
+        </ul>
       </section>
 
       <hr />
