@@ -100,7 +100,7 @@
       }
       mark {
         background: transparent;
-        color: var(--color-dark-1);
+        color: currentColor;
       }
       p {
         margin-bottom: var(--padding-size-medium);
@@ -125,13 +125,6 @@
       }
       ul.indent-left li {
         padding-left: var(--padding-size-base);
-      }
-      .print-break {
-        display: none;
-        height: 0;
-      }
-      .print-only {
-        display: none;
       }
       .sub-topic-wrapper {
         display: grid;
@@ -188,7 +181,7 @@
         :root {
           --color-dark-0: rgba(255, 255, 255);
           --color-dark-1: rgba(151, 153, 156);
-          --color-highlight: rgba(237, 115, 28, 0.2);
+          --color-highlight: rgba(12, 13, 15);
           --color-light-0: rgba(29, 31, 33);
           --color-light-1: rgba(53, 56, 59);
           --color-link: rgba(237, 115, 28);
@@ -242,14 +235,15 @@
         hr {
           display: none;
         }
+        mark {
+          background: transparent;
+          color: currentColor;
+        }
         p {
           margin-bottom: var(--padding-size-large);
         }
         ul.indent-left {
           margin-left: var(--padding-list-indent);
-        }
-        ul.indent-left li {
-          padding-left: 0;
         }
         .sub-topic-wrapper {
           grid-row-gap: var(--padding-size-medium);
@@ -306,13 +300,7 @@
       /* Mobile presentation rule overrides for optimal viewing experience */
       @media screen and (orientation: portrait) and (max-width: 800px) {
         :root {
-          --padding-size-base: 0.125rem;
-          --padding-size-small: 0.375rem;
-          --padding-size-medium: 0.75rem;
           --padding-size-large: 1rem;
-        }
-        ul.indent-left li {
-          padding-left: 0;
         }
         #skills ul {
           grid-gap: var(--padding-size-small);
@@ -326,7 +314,7 @@
 
   <body>
     <article id="resume">
-      <!-- Please take a moment to get t o know some basic info on my name and how to contact me. I'd be glad to hear from you! I apologize in advance if I happen to miss your call, please leave me a message and I'll return a call ASAP! -->
+      <!-- Please take a moment to get to know some basic info about me and how to contact me. I'd be glad to hear from you! I apologize in advance if I happen to miss your call, please leave me a message and I'll return a call ASAP! -->
       <header id="contact-info">
         <h1><strong>Stephen Seator</strong></h1>
         <ul>
@@ -573,9 +561,11 @@
 
       <hr />
 
+      <!-- Here is a convenient link to my resume in PDF form. Feel free to use this for easy printable formatting! -->
       <footer id="signoff">
         <a href="resume.pdf">view PDF version</a>
       </footer>
     </article>
+    <!-- Most of all, thanks for viewing! -->
   </body>
 </html>
